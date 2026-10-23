@@ -1,0 +1,13 @@
+MotoLog image assets
+
+Created with the built-in ImageGen tool. These are original illustrative studio
+images, not photographs of a user's actual motorcycle. No external image hosts
+are required. Both files are served by Django staticfiles.
+
+Hero: garage/static/garage/images/motorcycle-hero.png
+Prompt:
+Use case: product-mockup. Asset type: cinematic hero photograph for a premium motorcycle maintenance web application. Create an ultra-realistic luxury automotive studio photograph of a single beautiful graphite-black modern naked sport motorcycle, seen from a low front three-quarter angle with the front tire on the right and the rear on the left. Whole bike clearly visible, occupying the central 75% of the composition. Wide horizontal 16:9 composition. Pure near-black seamless studio background and floor, controlled silver rim lighting tracing the tank, front forks, brake discs, tires and sculptural bodywork. A faint tasteful floor reflection. Fine mechanical detail, physically believable motorcycle anatomy. Monochrome graphite, silver, subtle cool white LED headlight. Deep shadows, dramatic editorial lighting, high-end campaign art direction, tack-sharp subject. Background and all outer edges fade to near-black for seamless integration on a black website. No people, no brand logos, no text, no watermark, no typography, no borders. This is an actual image asset, not a website mockup.
+
+Detail: garage/static/garage/images/motorcycle-detail.png
+Prompt:
+Use case: product-mockup. Asset type: supporting editorial image for a premium motorcycle maintenance tracker. Photorealistic macro photograph of the rear wheel, chain drive, sprocket, brushed metal swingarm and engine details of a meticulously maintained graphite-black sport motorcycle. Wide 16:9 horizontal crop, beautifully composed industrial mechanical detail, soft silver light from upper left with restrained cool highlights, deep charcoal shadows and black studio background. Professional luxury automotive campaign photography, rich realistic metal and rubber textures, precise mechanical assembly, cinematic high contrast. No people, no brand logos, no text, no watermark. Image asset only.

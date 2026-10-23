@@ -1,0 +1,275 @@
+{% extends 'garage/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Introduce the app and link to the garage and service form. -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+            <div class="eyebrow">
+                <span class="tiny-line"></span> FOR THE LOVE OF THE RIDE
+            </div>
+            <h1 id="hero-title">
+                Built to ride.
+                <br>
+                <span>Kept to last.</span>
+            </h1>
+            <p>
+                Every mile has a story. Keep yours running.
+                <br>
+                Your motorcycles and maintenance, beautifully in sync.
+            </p>
+            <div class="actions hero-actions">
+                <a class="button button-primary"
+                   href="#garage">Enter your garage <span aria-hidden="true">↗</span>
+                </a>
+                <a class="button button-glass"
+                   href="{% url 'add' 'service' %}">Log a service <span aria-hidden="true">＋</span>
+                </a>
+            </div>
+        </div>
+        <figure class="hero-visual">
+            <img src="{% static 'garage/images/motorcycle-hero.png' %}"
+                 alt="Graphite sport motorcycle illuminated by silver studio light"
+                 fetchpriority="high"
+                 width="1536"
+                 height="864">
+            <figcaption>
+                <span>PRECISION IN EVERY DETAIL</span>
+                <span>01 / THE MACHINE</span>
+            </figcaption>
+        </figure>
+        <div class="hero-bottom">
+            <span>MAINTAIN THE MACHINE. MAKE THE MEMORIES.</span>
+            <a href="#garage"
+               aria-label="Scroll to your garage">SCROLL TO EXPLORE <span aria-hidden="true">↓</span>
+            </a>
+        </div>
+    </section>
+    <div class="workspace">
+        <!-- Show totals for all motorcycles and maintenance records. -->
+        <section class="stats" aria-label="Garage overview">
+            <div>
+                <span class="stat-label">01 / YOUR COLLECTION</span>
+                <strong>{{ bikes|length|stringformat:'02d' }} <small>motorcycles</small>
+                </strong>
+            </div>
+            <div>
+                <span class="stat-label">02 / THE WORK PUT IN</span>
+                <strong>{{ count|stringformat:'02d' }} <small>services logged</small>
+                </strong>
+            </div>
+            <div>
+                <span class="stat-label">03 / INVESTED IN THE RIDE</span>
+                <strong>${{ total|floatformat:2 }} <small>total maintenance</small>
+                </strong>
+            </div>
+        </section>
+        <section id="garage" class="garage-section" aria-labelledby="garage-title">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">THE MACHINES THAT MOVE YOU</div>
+                    <h2 id="garage-title">
+                        Your garage<span class="heading-dot">.</span>
+                    </h2>
+                </div>
+                <a class="text-link"
+                   href="{% url 'add' 'bike' %}">Add motorcycle <span aria-hidden="true">＋</span>
+                </a>
+            </div>
+            <div class="bikes">
+                <!-- Make one card for each motorcycle saved in the database. -->
+                {% for bike in bikes %}
+                    <article class="bike">
+                        <div class="bike-top">
+                            <span>{{ bike.year }} / {{ bike.make }}</span>
+                            <span class="index">{{ forloop.counter|stringformat:'02d' }}</span>
+                        </div>
+                        <div class="bike-identity">
+                            <span class="bike-label">IN YOUR COLLECTION</span>
+                            <h3>{{ bike }}</h3>
+                            <p>{{ bike.make }} {{ bike.model }}</p>
+                        </div>
+                        <div class="mileage">
+                            {{ bike.current_mileage }} <span>mi on the clock</span>
+                        </div>
+                        {% if bike.vin %}
+                            <p class="bike-vin"><span>VIN</span> {{ bike.vin }}</p>
+                        {% endif %}
+                        <div class="card-links">
+                            <a href="?bike={{ bike.pk }}#journal">Service history <span aria-hidden="true">↗</span>
+                            </a>
+                            <a href="{% url 'edit' 'bike' bike.pk %}"
+                               aria-label="Edit {{ bike }}">Edit</a>
+                            <a href="{% url 'delete' 'bike' bike.pk %}"
+                               aria-label="Delete {{ bike }}">Delete</a>
+                        </div>
+                    </article>
+                {% empty %}
+                    <article class="garage-empty">
+                        <div class="empty-copy">
+                            <span class="eyebrow">ROOM FOR YOUR NEXT CHAPTER</span>
+                            <h3>
+                                Great rides.
+                                <br>
+                                Start right here.
+                            </h3>
+                            <p>Give your motorcycle a home. Add your first bike and keep every service, mile, and memory in one place.</p>
+                            <a class="button button-primary"
+                               href="{% url 'add' 'bike' %}">Add your first motorcycle <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                        <div class="detail-visual">
+                            <img src="{% static 'garage/images/motorcycle-detail.png' %}"
+                                 alt="Studio detail of a motorcycle chain, rear wheel and brushed metal components"
+                                 loading="lazy"
+                                 width="1536"
+                                 height="864">
+                            <span>CRAFTED TO GO THE DISTANCE</span>
+                        </div>
+                    </article>
+                {% endfor %}
+                {% if bikes|length == 1 %}
+                    <aside class="garage-editorial">
+                        <img src="{% static 'garage/images/motorcycle-detail.png' %}"
+                             alt="Close-up of a motorcycle drivetrain and rear wheel"
+                             loading="lazy"
+                             width="1672"
+                             height="941">
+                        <div>
+                            <span class="eyebrow">CARE IS PART OF THE CRAFT</span>
+                            <h3>
+                                Ready for
+                                <br>
+                                every mile.
+                            </h3>
+                            <a class="text-link"
+                               href="{% url 'add' 'service' %}">Keep your story going <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+                    </aside>
+                {% endif %}
+            </div>
+        </section>
+        {% include 'garage/spending.html' %}
+        <section id="journal" class="journal-section" aria-labelledby="journal-title">
+            <div class="section-heading">
+                <div>
+                    <div class="eyebrow">EVERY SERVICE. EVERY DETAIL.</div>
+                    <h2 id="journal-title">
+                        The maintenance journal<span class="heading-dot">.</span>
+                    </h2>
+                </div>
+                <a class="text-link"
+                   href="{% url 'add' 'service' %}">Log a service <span aria-hidden="true">＋</span>
+                </a>
+            </div>
+            <div class="journal-panel">
+                <!-- Send the search and date filters back to the dashboard. -->
+                <form class="filters" method="get" action="{% url 'dashboard' %}#journal">
+                    <input type="hidden" name="chart_year" value="{{ spending.year }}">
+                    <input type="hidden" name="chart_bike" value="{{ spending.selected_bike }}">
+                    <div class="search-field">
+                        <label class="sr-only" for="service-search">Search services or notes</label>
+                        <svg aria-hidden="true"
+                             width="18"
+                             height="18"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="1.5">
+                            <circle cx="10.5" cy="10.5" r="6.5" />
+                            <path d="m16 16 5 5" />
+                        </svg>
+                        <input id="service-search"
+                               name="q"
+                               placeholder="Search services or notes"
+                               value="{{ q }}">
+                    </div>
+                    <div class="filter-field">
+                        <label for="bike-filter">Motorcycle</label>
+                        <select id="bike-filter" name="bike">
+                            <option value="">All motorcycles</option>
+                            {% for bike in bikes %}
+                                <option value="{{ bike.pk }}"
+                                        {% if selected == bike.pk|stringformat:'s' %}selected{% endif %}>{{ bike }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="filter-field">
+                        <label for="date-start">From</label>
+                        <input id="date-start" type="date" name="start" value="{{ start }}">
+                    </div>
+                    <div class="filter-field">
+                        <label for="date-end">To</label>
+                        <input id="date-end" type="date" name="end" value="{{ end }}">
+                    </div>
+                    <button class="button button-glass" type="submit">Filter</button>
+                    <a class="reset-link" href="{% url 'dashboard' %}#journal">Reset</a>
+                </form>
+                <!-- List the matching services with links to edit or delete them. -->
+                <div class="table-wrap"
+                     role="region"
+                     aria-label="Maintenance records"
+                     tabindex="0">
+                    <table {% if not services %}class="table-empty"{% endif %}>
+                        <thead>
+                            <tr>
+                                <th scope="col">SERVICE / NOTES</th>
+                                <th scope="col">MOTORCYCLE</th>
+                                <th scope="col">DATE</th>
+                                <th scope="col">MILEAGE</th>
+                                <th scope="col">COST</th>
+                                <th scope="col">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for service in services %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ service.service_type }}</strong>
+                                        {% if service.notes %}
+                                            <small>{{ service.notes|truncatechars:100 }}</small>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ service.motorcycle }}</td>
+                                    <td>{{ service.service_date|date:'M j, Y' }}</td>
+                                    <td>{{ service.mileage }} mi</td>
+                                    <td class="cost">${{ service.cost }}</td>
+                                    <td class="row-actions">
+                                        <a href="{% url 'edit' 'service' service.pk %}"
+                                           aria-label="Edit {{ service.service_type }}">Edit</a>
+                                        <a href="{% url 'delete' 'service' service.pk %}"
+                                           aria-label="Delete {{ service.service_type }}">Delete</a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="6" class="journal-empty">
+                                        <div class="journal-empty-mark" aria-hidden="true">＋</div>
+                                        <strong>
+                                            {% if q or selected or start or end %}No services match your filters.{% else %}A clean slate. A well-kept ride.{% endif %}
+                                        </strong>
+                                        <p>
+                                            {% if q or selected or start or end %}Try another search or reset your filters.{% else %}Your maintenance history starts with the first service you log.{% endif %}
+                                        </p>
+                                        <a class="text-link"
+                                           href="{% url 'add' 'service' %}">Log a service <span aria-hidden="true">↗</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <div class="closing-line">
+            <span class="tiny-line"></span>
+            <p>
+                Take care of the details.
+                <br>
+                <span>The open road is waiting.</span>
+            </p>
+            <span class="tiny-line"></span>
+        </div>
+    </div>
+{% endblock %}

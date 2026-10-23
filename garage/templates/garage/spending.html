@@ -1,0 +1,112 @@
+<!-- Show monthly costs using the service records saved in the database. -->
+<section id="spending" class="spending-section" aria-labelledby="spending-title">
+    <div class="section-heading">
+        <div>
+            <div class="eyebrow">KNOW WHAT GOES INTO THE RIDE</div>
+            <h2 id="spending-title">Your spending<span class="heading-dot">.</span></h2>
+        </div>
+        <a class="text-link" href="{% url 'add' 'service' %}">
+            Log a service <span aria-hidden="true">＋</span>
+        </a>
+    </div>
+    <div class="spending-panel">
+        <div class="spending-toolbar">
+            <div>
+                <h3>Monthly maintenance costs</h3>
+                <p>{{ spending.count }} service{{ spending.count|pluralize }} recorded in {{ spending.year }} · USD</p>
+            </div>
+            <form class="spending-filters" method="get" action="{% url 'dashboard' %}#spending">
+                <input type="hidden" name="q" value="{{ q }}">
+                <input type="hidden" name="bike" value="{{ selected }}">
+                <input type="hidden" name="start" value="{{ start }}">
+                <input type="hidden" name="end" value="{{ end }}">
+                <div>
+                    <label for="spending-bike">Motorcycle</label>
+                    <select id="spending-bike" name="chart_bike">
+                        <option value="">All motorcycles</option>
+                        {% for bike in bikes %}
+                            <option value="{{ bike.pk }}" {% if spending.selected_bike == bike.pk|stringformat:'s' %}selected{% endif %}>{{ bike }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="spending-year">Year</label>
+                    <select id="spending-year" name="chart_year">
+                        {% for year in spending.years %}
+                            <option value="{{ year }}" {% if spending.year == year %}selected{% endif %}>{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button class="button button-glass" type="submit">Update chart</button>
+            </form>
+        </div>
+        <div class="spending-summary">
+            <div>
+                <span>YEAR TOTAL</span>
+                <strong>${{ spending.total|floatformat:2 }}</strong>
+                <small>{% if spending.selected_bike %}Selected motorcycle{% else %}All motorcycles{% endif %}</small>
+            </div>
+            <div>
+                <span>MONTHLY AVERAGE</span>
+                <strong>${{ spending.average|floatformat:2 }}</strong>
+                <small>Across all 12 months</small>
+            </div>
+            <div>
+                <span>HIGHEST MONTH</span>
+                <strong>${{ spending.highest|floatformat:2 }}</strong>
+                <small>{{ spending.peak_label }}</small>
+            </div>
+        </div>
+        {% if spending.total %}
+            <p id="spending-help" class="chart-hint">Select a month to view its service records.</p>
+            <div class="spending-chart-scroll" role="region" aria-label="Monthly spending chart" tabindex="0">
+                <div class="spending-chart" aria-describedby="spending-help">
+                    <div class="spending-axis" aria-hidden="true">
+                        <span>${{ spending.highest|floatformat:2 }}</span>
+                        <span>${{ spending.midpoint|floatformat:2 }}</span>
+                        <span>$0.00</span>
+                    </div>
+                    <div class="spending-plot">
+                        <div class="chart-grid" aria-hidden="true"><span></span><span></span><span></span></div>
+                        {% for month in spending.months %}
+                            <a class="spending-month" href="{% url 'dashboard' %}?chart_year={{ spending.year }}&amp;chart_bike={{ spending.selected_bike }}&amp;bike={{ spending.selected_bike }}&amp;start={{ month.start }}&amp;end={{ month.end }}#journal" aria-label="{{ month.name }} {{ spending.year }}: ${{ month.total|floatformat:2 }}, {{ month.count }} service{{ month.count|pluralize }}. View records.">
+                                <span class="spending-track" aria-hidden="true">
+                                    <span class="spending-bar" style="height: {{ month.height }}%"></span>
+                                </span>
+                                <span class="spending-month-label" aria-hidden="true">{{ month.label }}</span>
+                                <span class="spending-tooltip" aria-hidden="true">
+                                    {{ month.name }} · ${{ month.total|floatformat:2 }}
+                                    <small>{{ month.count }} service{{ month.count|pluralize }}</small>
+                                </span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="spending-empty">
+                <div class="empty-chart-icon" aria-hidden="true"><span></span><span></span><span></span></div>
+                <h4>No spending recorded in {{ spending.year }}.</h4>
+                <p>{% if spending.count %}All recorded services for this selection cost $0.00.{% else %}Log a service with a cost to start your spending chart.{% endif %}</p>
+                <a class="text-link" href="{% url 'add' 'service' %}">Log a service <span aria-hidden="true">↗</span></a>
+            </div>
+        {% endif %}
+        <!-- Keep the exact totals available as a table for easy reading. -->
+        <details class="spending-details">
+            <summary>View monthly totals <span aria-hidden="true">＋</span></summary>
+            <div class="table-wrap">
+                <table>
+                    <caption class="sr-only">Monthly maintenance spending in {{ spending.year }}</caption>
+                    <thead>
+                        <tr><th scope="col">MONTH</th><th scope="col">SERVICES</th><th scope="col">TOTAL</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for month in spending.months %}
+                            <tr><th scope="row">{{ month.name }}</th><td>{{ month.count }}</td><td>${{ month.total|floatformat:2 }}</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </details>
+    </div>
+</section>

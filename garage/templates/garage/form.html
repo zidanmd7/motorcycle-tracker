@@ -1,0 +1,54 @@
+{% extends 'garage/base.html' %}
+{% load static %}
+{% block title %}{{ title }} — MotoLog{% endblock %}
+{% block content %}
+    <div class="form-page">
+        <a class="back text-link" href="{% url 'dashboard' %}#garage">← Back to your garage</a>
+        <div class="form-layout">
+            <aside class="form-story">
+                <img src="{% static 'garage/images/motorcycle-detail.png' %}"
+                     alt="Motorcycle chain and wheel in dramatic studio lighting"
+                     width="1536"
+                     height="864">
+                <div class="form-story-copy">
+                    <div class="eyebrow">THE DETAILS MAKE THE DIFFERENCE</div>
+                    <h2>A little care.<br>A longer ride.</h2>
+                    <p>Keep the story of your machine, one record at a time.</p>
+                </div>
+            </aside>
+            <section class="form-panel">
+                <div class="eyebrow">YOUR MOTORCYCLE'S STORY</div>
+                <h1>{{ title }}<span class="heading-dot">.</span></h1>
+                <p class="form-intro">The details today. Peace of mind on the next ride.</p>
+                <!-- Show the form fields and send valid entries back to the server. -->
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="form-fields">
+                        {% for field in form %}
+                            <div class="form-field {% if field.name == 'notes' %}full-width{% endif %}">
+                                <label for="{{ field.id_for_label }}">
+                                    {{ field.label }}
+                                    {% if not field.field.required %}
+                                        <span class="optional">Optional</span>
+                                    {% endif %}
+                                </label>
+                                {{ field }}
+                                {{ field.errors }}
+                                {% if field.help_text %}
+                                    <p class="help-text">{{ field.help_text }}</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="form-actions">
+                        <button class="button button-primary" type="submit">
+                            Save record <span aria-hidden="true">↗</span>
+                        </button>
+                        <a href="{% url 'dashboard' %}#garage">Cancel</a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+{% endblock %}

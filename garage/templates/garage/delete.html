@@ -1,0 +1,24 @@
+{% extends 'garage/base.html' %}
+{% block title %}Delete record — MotoLog{% endblock %}
+{% block content %}
+    <div class="form-page delete-page">
+        <a class="back text-link" href="{% url 'dashboard' %}#garage">← Back to your garage</a>
+        <section class="form-panel delete-panel">
+            <div class="eyebrow">MANAGE YOUR GARAGE</div>
+            <h1>Delete this record?</h1>
+            <p>
+                {% if kind == 'bike' %}Deleting <strong>{{ item }}</strong> also deletes all its maintenance records.{% else %}
+                    <strong>{{ item.service_type }}</strong> for {{ item.motorcycle }} will be permanently removed.{% endif %}
+            </p>
+            <p>This action cannot be undone.</p>
+            <!-- Ask for confirmation before removing a record. -->
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-actions">
+                    <button class="button button-danger" type="submit">Confirm deletion</button>
+                    <a href="{% url 'dashboard' %}#garage">Keep record</a>
+                </div>
+            </form>
+        </section>
+    </div>
+{% endblock %}

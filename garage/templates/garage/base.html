@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="theme-color" content="#080809">
+        <meta name="description"
+              content="Your motorcycles. Every mile. Every service. MotoLog keeps your garage in order.">
+        <title>{% block title %}MotoLog — Built to ride. Kept to last.{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'garage/style.css' %}">
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Skip to content</a>
+        <!-- Reuse the same header on every page. -->
+        <header class="site-header">
+            <a class="brand" href="{% url 'dashboard' %}" aria-label="MotoLog home">
+                <span class="brand-mark" aria-hidden="true">
+                    <i>
+                    </i>
+                    <i>
+                    </i>
+                    <i>
+                    </i>
+                </span>MOTO<span class="brand-light">LOG</span>
+                <span class="brand-period">®</span>
+            </a>
+            <nav aria-label="Main navigation">
+                <a href="{% url 'dashboard' %}#garage">Your garage</a>
+                <a href="{% url 'dashboard' %}#spending">Spending</a>
+                <a href="{% url 'dashboard' %}#journal">Service journal</a>
+            </nav>
+            <a class="button header-button"
+               href="{% url 'add' 'bike' %}">Add motorcycle <span aria-hidden="true">↗</span>
+            </a>
+        </header>
+        <!-- Put the content from each page inside this shared layout. -->
+        <main id="main">
+            {% block content %}{% endblock %}
+        </main>
+        <footer class="site-footer">
+            <a class="brand" href="{% url 'dashboard' %}">MOTO<span class="brand-light">LOG</span>
+            </a>
+            <span>A little care. A longer ride.</span>
+            <a href="{% url 'dashboard' %}#main">Back to top <span aria-hidden="true">↑</span>
+            </a>
+        </footer>
+    </body>
+</html>

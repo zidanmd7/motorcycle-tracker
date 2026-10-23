@@ -1,0 +1,1943 @@
+/* Keep the main colors and font in one place. */
+:root {
+    color-scheme: dark;
+    --bg: #080809;
+    --panel: #101113;
+    --text: #f6f6f7;
+    --muted: #929297;
+    --line: #27282c;
+    --line-light: #424349;
+    --font: Inter, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 30px;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a,
+button {
+    transition: color .2s, background .2s, border-color .2s, transform .2s;
+}
+
+button {
+    cursor: pointer;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid #e4e5ee;
+    outline-offset: 5px;
+}
+
+::selection {
+    background: #d8d9e1;
+    color: #0b0b0c;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    left: 15px;
+    top: -100px;
+    background: white;
+    color: #111;
+    padding: 15px;
+    z-index: 10;
+}
+
+.skip-link:focus {
+    top: 12px;
+}
+
+/* Place the logo, navigation links, and add button in the header. */
+.site-header {
+    height: 100px;
+    max-width: 1440px;
+    margin: auto;
+    padding: 0 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.brand {
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -.7px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.brand-light {
+    font-weight: 400;
+    color: #d8d8dc;
+}
+
+.brand-period {
+    font-size: 9px;
+    align-self: flex-start;
+    margin: 2px 0 0 4px;
+    color: var(--muted);
+}
+
+.brand-mark {
+    display: flex;
+    gap: 3px;
+    margin-right: 13px;
+    transform: skew(-23deg);
+}
+
+.brand-mark i {
+    height: 20px;
+    width: 5px;
+    background: #f6f6f7;
+}
+
+.brand-mark i:nth-child(2) {
+    height: 15px;
+    margin-top: 5px;
+}
+
+.brand-mark i:nth-child(3) {
+    height: 10px;
+    margin-top: 10px;
+}
+
+.site-header nav {
+    display: flex;
+    gap: 36px;
+}
+
+.site-header nav a {
+    color: #b7b7bd;
+    font-size: 13px;
+}
+
+.site-header nav a:hover,
+.text-link:hover,
+.row-actions a:hover {
+    color: white;
+}
+
+/* Use the same button styles throughout the app. */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    min-height: 48px;
+    border: 1px solid var(--line-light);
+    border-radius: 7px;
+    padding: 0 22px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    background: transparent;
+    color: white;
+}
+
+.button:hover {
+    border-color: #898a90;
+    transform: translateY(-2px);
+}
+
+.button-primary {
+    background: #f1f1f3;
+    border-color: #f1f1f3;
+    color: #141416;
+}
+
+.button-primary:hover {
+    background: white;
+    border-color: white;
+}
+
+.button-glass,
+.header-button {
+    background: linear-gradient(110deg, #18191c 5%, #151517 64%, #343437 100%);
+    box-shadow: inset 0 1px 0 #ffffff0a;
+}
+
+.header-button {
+    min-height: 44px;
+    font-size: 11px;
+    gap: 24px;
+}
+
+/* Style the introduction and the large motorcycle image. */
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding-top: 52px;
+}
+
+.hero-copy {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    padding: 0 24px;
+}
+
+.eyebrow {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2.2px;
+    color: #9b9ba3;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hero .eyebrow {
+    justify-content: center;
+}
+
+.tiny-line {
+    display: inline-block;
+    height: 1px;
+    width: 24px;
+    background: #96969d;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+.hero h1 {
+    font-size: clamp(56px, 6.6vw, 94px);
+    font-weight: 600;
+    line-height: 1.01;
+    letter-spacing: -5.5px;
+    margin: 26px 0 22px;
+}
+
+.hero h1 span {
+    color: #a9a9b0;
+}
+
+.hero-copy>p {
+    font-size: 14px;
+    line-height: 1.85;
+    color: #96969f;
+    letter-spacing: .05px;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.hero-actions {
+    justify-content: center;
+    margin-top: 29px;
+}
+
+.hero-visual {
+    position: relative;
+    max-width: 1200px;
+    margin: -3px auto 0;
+    height: 480px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.hero-visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 53%;
+}
+
+.hero-visual:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, var(--bg), transparent 18%, transparent 72%, var(--bg)), linear-gradient(to right, var(--bg), transparent 18%, transparent 82%, var(--bg));
+    pointer-events: none;
+}
+
+.hero-visual figcaption {
+    position: absolute;
+    inset: auto 7% 28px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    letter-spacing: 1.7px;
+    color: #85858d;
+    z-index: 1;
+}
+
+.hero-bottom {
+    max-width: 1268px;
+    margin: auto;
+    padding: 0 24px 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: #686870;
+}
+
+.hero-bottom a {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.hero-bottom a span {
+    font-size: 19px;
+    color: #bbbcc3;
+}
+
+/* Keep the garage content centered with space on both sides. */
+.workspace {
+    max-width: 1280px;
+    padding: 0 32px;
+    margin: auto;
+}
+
+/* Show the motorcycle count, service count, and total cost. */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 30px 0;
+}
+
+.stats>div {
+    padding: 4px 40px;
+    border-right: 1px solid var(--line);
+}
+
+.stats>div:first-child {
+    padding-left: 0;
+}
+
+.stats>div:last-child {
+    border: 0;
+}
+
+.stat-label {
+    font-size: 9px;
+    letter-spacing: 1.4px;
+    color: #96969d;
+}
+
+.stats strong {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-size: 35px;
+    font-weight: 500;
+    letter-spacing: -1.5px;
+    margin-top: 20px;
+    font-variant-numeric: tabular-nums;
+}
+
+.stats small {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: #8b8b94;
+}
+
+.garage-section,
+.journal-section {
+    padding-top: 76px;
+    scroll-margin-top: 30px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 28px;
+}
+
+.section-heading h2 {
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: -1.4px;
+    margin-top: 14px;
+}
+
+.heading-dot {
+    color: #71717b;
+}
+
+.text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 12px;
+    color: #d0d0d6;
+}
+
+.text-link span {
+    font-size: 18px;
+}
+
+/* Arrange the motorcycle cards in a grid. */
+.bikes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.bike {
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+    background: radial-gradient(ellipse at top right, #25272c 0, transparent 60%), #101113;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    transition: border-color .2s, transform .2s;
+}
+
+.bike:hover {
+    border-color: #4d4e57;
+    transform: translateY(-3px);
+}
+
+.bike-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #a9a9b2;
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.bike-top .index {
+    font-size: 27px;
+    color: #777984;
+    font-weight: 300;
+    letter-spacing: -1px;
+}
+
+.bike-identity {
+    padding: 32px 0 24px;
+}
+
+.bike-label {
+    font-size: 8px;
+    color: #73747e;
+    letter-spacing: 2px;
+}
+
+.bike h3 {
+    font-size: 27px;
+    letter-spacing: -1px;
+    font-weight: 500;
+    margin: 12px 0 8px;
+    overflow-wrap: anywhere;
+}
+
+.bike p {
+    font-size: 12px;
+    color: #9999a3;
+}
+
+.mileage {
+    font-size: 26px;
+    letter-spacing: -1px;
+    font-weight: 400;
+}
+
+.mileage span {
+    font-size: 10px;
+    letter-spacing: 0;
+    color: #8e8f98;
+    margin-left: 6px;
+}
+
+.card-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    margin-top: 25px;
+    padding-top: 18px;
+    font-size: 10px;
+    color: #a8a9b2;
+}
+
+.card-links a:first-child {
+    margin-right: auto;
+    color: #eeeff4;
+}
+
+.card-links a:hover {
+    color: white;
+}
+
+/* Show a welcome card when the user has not added a motorcycle. */
+.garage-empty {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 350px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #101113;
+}
+
+.empty-copy {
+    padding: 45px 48px;
+    position: relative;
+    z-index: 1;
+}
+
+.empty-copy .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+}
+
+.empty-copy h3 {
+    font-size: 36px;
+    letter-spacing: -1.4px;
+    line-height: 1.15;
+    font-weight: 500;
+    margin: 19px 0 18px;
+}
+
+.empty-copy p {
+    max-width: 320px;
+    color: #92939c;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.empty-copy .button {
+    margin-top: 24px;
+    min-height: 43px;
+    font-size: 11px;
+}
+
+.detail-visual {
+    position: relative;
+    overflow: hidden;
+    min-height: 330px;
+}
+
+.detail-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.detail-visual:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #101113, transparent 36%), linear-gradient(to top, #101113b0, transparent 45%);
+}
+
+.detail-visual>span {
+    position: absolute;
+    bottom: 25px;
+    right: 28px;
+    color: #a1a1a9;
+    z-index: 1;
+    letter-spacing: 1.7px;
+    font-size: 8px;
+}
+
+/* Group the search filters and maintenance history together. */
+.journal-panel {
+    background: #101113;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.filters {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+    padding: 22px;
+    border-bottom: 1px solid var(--line);
+}
+
+input,
+select,
+textarea {
+    color: #e0e0e6;
+    background: #151619;
+    border: 1px solid #303137;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 12px;
+    min-width: 0;
+    transition: border-color .2s;
+    width: 100%;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: #565761;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #898994;
+}
+
+input[type=date] {
+    min-height: 42px;
+    font-size: 11px;
+}
+
+select {
+    min-height: 42px;
+    padding-right: 24px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+label {
+    font-size: 11px;
+    color: #babac3;
+}
+
+.search-field {
+    flex: 1;
+    position: relative;
+    min-width: 160px;
+}
+
+.search-field svg {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: #888995;
+}
+
+.search-field input {
+    padding-left: 39px;
+    height: 42px;
+    font-size: 11px;
+}
+
+.filter-field {
+    flex: 0 1 145px;
+}
+
+.filter-field label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: .4px;
+    margin: 0 0 8px 1px;
+    color: #8e8f99;
+}
+
+.filters .button {
+    min-height: 42px;
+    padding: 0 18px;
+}
+
+.reset-link {
+    align-self: flex-end;
+    line-height: 42px;
+    font-size: 10px;
+    color: #aaaab3;
+}
+
+/* Let wide tables scroll on smaller screens. */
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th {
+    padding: 18px 22px;
+    color: #8d8d98;
+    font-size: 8px;
+    letter-spacing: 1.1px;
+    font-weight: 500;
+    white-space: nowrap;
+    background: #121315;
+}
+
+td {
+    padding: 23px 22px;
+    border-top: 1px solid #24252a;
+    font-size: 11px;
+    color: #aaaab5;
+}
+
+td strong {
+    font-weight: 500;
+    color: #eeeef3;
+    font-size: 12px;
+}
+
+td small {
+    display: block;
+    color: #8c8c96;
+    line-height: 1.6;
+    margin-top: 5px;
+    max-width: 300px;
+}
+
+td.cost {
+    color: #eeeef3;
+    font-variant-numeric: tabular-nums;
+}
+
+.row-actions {
+    white-space: nowrap;
+}
+
+.row-actions a+a {
+    margin-left: 14px;
+}
+
+.journal-empty {
+    text-align: center;
+    padding: 46px 20px 42px;
+}
+
+.journal-empty-mark {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #404149;
+    border-radius: 50%;
+    font-size: 21px;
+    font-weight: 200;
+    color: #a9aab5;
+    margin: 0 auto 18px;
+}
+
+.journal-empty strong {
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+}
+
+.journal-empty p {
+    font-size: 11px;
+    color: #93939e;
+    margin: 11px 0 21px;
+}
+
+.journal-empty .text-link {
+    font-size: 10px;
+    gap: 15px;
+}
+
+.closing-line {
+    padding: 84px 0;
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    justify-content: center;
+}
+
+.closing-line p {
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: -.5px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.closing-line p span {
+    color: #81818b;
+}
+
+.closing-line .tiny-line {
+    background: #3e3f47;
+    width: 38px;
+}
+
+/* Place the footer links below the page content. */
+.site-footer {
+    max-width: 1216px;
+    margin: auto;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 29px 0 34px;
+    color: #8c8c96;
+    font-size: 10px;
+}
+
+.site-footer .brand {
+    font-size: 15px;
+    color: #eeeef5;
+}
+
+.site-footer>a:last-child {
+    display: flex;
+    gap: 15px;
+}
+
+/* Style the add, edit, and delete pages. */
+.form-page {
+    max-width: 1280px;
+    padding: 35px 32px 90px;
+    margin: auto;
+    min-height: calc(100vh - 180px);
+}
+
+.back {
+    font-size: 11px;
+    color: #a5a5af;
+}
+
+.form-layout {
+    display: grid;
+    grid-template-columns: .85fr 1.15fr;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 30px;
+    background: var(--panel);
+}
+
+.form-story {
+    position: relative;
+    min-height: 650px;
+    overflow: hidden;
+    background: #09090b;
+}
+
+.form-story>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: .65;
+}
+
+.form-story:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #080809 0, transparent 100%);
+}
+
+.form-story-copy {
+    position: absolute;
+    bottom: 48px;
+    left: 38px;
+    right: 30px;
+    z-index: 1;
+}
+
+.form-story-copy .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+}
+
+.form-story-copy h2 {
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: -1.8px;
+    font-weight: 500;
+    margin: 20px 0;
+}
+
+.form-story-copy p {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #9898a3;
+    max-width: 260px;
+}
+
+.form-panel {
+    padding: 44px;
+}
+
+.form-panel h1 {
+    font-size: 35px;
+    line-height: 1.1;
+    letter-spacing: -1.6px;
+    font-weight: 500;
+    margin: 17px 0;
+}
+
+.form-intro {
+    font-size: 12px;
+    color: #92929d;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.form-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 18px;
+}
+
+.form-field label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 9px;
+    font-size: 11px;
+}
+
+.form-field .optional {
+    font-size: 9px;
+    color: #7e7f8b;
+}
+
+.full-width {
+    grid-column: 1/-1;
+}
+
+.form-field input,
+.form-field select {
+    min-height: 46px;
+}
+
+.form-field input[type=date] {
+    font-size: 12px;
+}
+
+.help-text {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 7px;
+    line-height: 1.5;
+}
+
+.errorlist {
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+    color: #ff9d9d;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.form-actions {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-top: 32px;
+    padding-top: 25px;
+    border-top: 1px solid var(--line);
+}
+
+.form-actions>a {
+    font-size: 12px;
+    color: #aaaab5;
+}
+
+.delete-panel {
+    max-width: 640px;
+    margin: 60px auto;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.delete-panel>p {
+    color: #a5a5af;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 15px;
+}
+
+.delete-panel strong {
+    color: #ececf1;
+    font-weight: 500;
+}
+
+.button-danger {
+    background: #56252b;
+    border-color: #99505a;
+    color: #ffe5e7;
+}
+
+.button-danger:hover {
+    background: #75343e;
+    border-color: #cf6978;
+}
+
+/* Give the hero more room on wide screens. */
+@media(min-width:1500px) {
+    .hero {
+        padding-top: 72px;
+    }
+
+    .hero-visual {
+        height: 530px;
+        max-width: 1300px;
+    }
+}
+
+/* Adjust the cards and filters for tablet screens. */
+@media(max-width:1050px) {
+    .stats strong {
+        flex-direction: column;
+        gap: 8px;
+        font-size: 32px;
+    }
+
+    .stats>div {
+        padding: 4px 25px;
+    }
+
+    .filters {
+        flex-wrap: wrap;
+    }
+
+    .search-field {
+        flex-basis: 40%;
+    }
+
+    .filter-field {
+        flex-grow: 1;
+    }
+
+    .bikes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .empty-copy {
+        padding: 35px;
+    }
+
+    .form-panel {
+        padding: 32px;
+    }
+
+    .form-story-copy {
+        left: 26px;
+    }
+
+    .form-story-copy h2 {
+        font-size: 35px;
+    }
+
+    .site-footer {
+        margin: 0 32px;
+    }
+
+    .hero-visual {
+        height: 420px;
+    }
+}
+
+/* Stack the page content so it fits on phones. */
+@media(max-width:700px) {
+    .site-header {
+        height: 82px;
+        padding: 0 22px;
+        gap: 12px;
+    }
+
+    .brand {
+        font-size: 18px;
+    }
+
+    .brand-mark {
+        margin-right: 10px;
+    }
+
+    .site-header nav {
+        display: none;
+    }
+
+    .header-button {
+        padding: 0 13px;
+        min-height: 39px;
+        gap: 12px;
+        font-size: 10px;
+    }
+
+    .hero {
+        padding-top: 43px;
+    }
+
+    .hero h1 {
+        font-size: 62px;
+        letter-spacing: -3.5px;
+        margin: 24px 0 20px;
+    }
+
+    .hero .eyebrow {
+        font-size: 7px;
+        letter-spacing: 1.6px;
+    }
+
+    .hero-copy>p {
+        font-size: 12px;
+        line-height: 1.9;
+    }
+
+    .hero-actions {
+        gap: 9px;
+        margin-top: 25px;
+    }
+
+    .hero-actions .button {
+        padding: 0 16px;
+        font-size: 10px;
+        gap: 15px;
+        min-height: 44px;
+    }
+
+    .hero-visual {
+        height: 320px;
+        width: 125%;
+        max-width: none;
+        margin-left: -12.5%;
+        margin-top: 12px;
+    }
+
+    .hero-visual figcaption {
+        display: none;
+    }
+
+    .hero-bottom {
+        padding: 0 22px 24px;
+        font-size: 6px;
+        letter-spacing: .8px;
+        gap: 15px;
+    }
+
+    .hero-bottom a {
+        gap: 9px;
+    }
+
+    .workspace {
+        padding: 0 22px;
+    }
+
+    .stats {
+        padding: 22px 0;
+    }
+
+    .stats>div {
+        padding: 2px 13px;
+    }
+
+    .stat-label {
+        font-size: 6px;
+        letter-spacing: .7px;
+    }
+
+    .stats strong {
+        font-size: 24px;
+        margin-top: 15px;
+        gap: 7px;
+        letter-spacing: -1px;
+    }
+
+    .stats small {
+        font-size: 8px;
+        line-height: 1.4;
+    }
+
+    .garage-section,
+    .journal-section {
+        padding-top: 48px;
+    }
+
+    .section-heading {
+        align-items: flex-end;
+        gap: 12px;
+        margin-bottom: 23px;
+    }
+
+    .eyebrow {
+        font-size: 7px;
+        letter-spacing: 1.4px;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+        letter-spacing: -1px;
+        margin-top: 11px;
+    }
+
+    .section-heading>.text-link {
+        font-size: 9px;
+        gap: 9px;
+        white-space: nowrap;
+        margin-bottom: 3px;
+    }
+
+    .section-heading>.text-link span {
+        font-size: 15px;
+    }
+
+    .bikes {
+        grid-template-columns: 1fr;
+    }
+
+    .garage-empty {
+        grid-template-columns: 1fr;
+    }
+
+    .empty-copy {
+        padding: 30px;
+    }
+
+    .empty-copy h3 {
+        font-size: 32px;
+    }
+
+    .detail-visual {
+        min-height: 230px;
+        grid-row: 2;
+    }
+
+    .detail-visual:after {
+        background: linear-gradient(to bottom, #101113, transparent 40%), linear-gradient(to top, #101113aa, transparent 40%);
+    }
+
+    .detail-visual>span {
+        font-size: 7px;
+    }
+
+    .journal-section .section-heading h2 {
+        font-size: 23px;
+        max-width: 210px;
+    }
+
+    .filters {
+        padding: 18px;
+        gap: 13px;
+    }
+
+    .search-field {
+        flex-basis: 100%;
+    }
+
+    .filter-field {
+        flex-basis: calc(50% - 8px);
+        min-width: 0;
+    }
+
+    .filter-field:has(select) {
+        flex-basis: 100%;
+    }
+
+    .filters .button {
+        flex: 1;
+    }
+
+    .reset-link {
+        padding: 0 10px;
+    }
+
+    .journal-empty {
+        padding: 35px 16px;
+    }
+
+    .journal-empty strong {
+        font-size: 13px;
+    }
+
+    .journal-empty p {
+        line-height: 1.8;
+        max-width: 250px;
+        margin: 10px auto 18px;
+    }
+
+    th {
+        padding: 15px 17px;
+        font-size: 7px;
+    }
+
+    td {
+        padding: 20px 17px;
+    }
+
+    .closing-line {
+        padding: 55px 0;
+        gap: 18px;
+    }
+
+    .closing-line p {
+        font-size: 15px;
+    }
+
+    .closing-line .tiny-line {
+        width: 22px;
+    }
+
+    .site-footer {
+        margin: 0 22px;
+        padding: 25px 0;
+        gap: 20px;
+        flex-wrap: wrap;
+        font-size: 8px;
+    }
+
+    .site-footer .brand {
+        font-size: 13px;
+    }
+
+    .site-footer>span {
+        display: none;
+    }
+
+    .form-page {
+        padding: 20px 20px 50px;
+    }
+
+    .form-layout {
+        display: block;
+        margin-top: 25px;
+    }
+
+    .form-story {
+        min-height: 200px;
+    }
+
+    .form-story-copy {
+        bottom: 24px;
+        left: 25px;
+    }
+
+    .form-story-copy h2 {
+        font-size: 28px;
+        letter-spacing: -1px;
+        margin: 12px 0;
+    }
+
+    .form-story-copy p {
+        display: none;
+    }
+
+    .form-story>img {
+        object-position: center 60%;
+    }
+
+    .form-panel {
+        padding: 29px 24px;
+    }
+
+    .form-panel h1 {
+        font-size: 29px;
+        letter-spacing: -1px;
+    }
+
+    .form-fields {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .form-intro {
+        font-size: 11px;
+        margin-bottom: 25px;
+    }
+
+    .delete-panel {
+        margin-top: 30px;
+    }
+
+    .delete-panel .form-actions {
+        gap: 16px;
+    }
+
+    .delete-panel .button {
+        padding: 0 15px;
+        font-size: 11px;
+    }
+}
+
+/* Turn off animation when the user prefers less motion. */
+@media(prefers-reduced-motion:reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *:before,
+    *:after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* A studio detail sits beside a single motorcycle without implying it is its photo. */
+.garage-editorial {
+    grid-column: span 2;
+    position: relative;
+    min-height: 300px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    overflow: hidden;
+    background: #0e0f11;
+}
+
+.garage-editorial>img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: .7;
+}
+
+.garage-editorial:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #0e0f11f0, transparent 95%);
+}
+
+.garage-editorial>div {
+    position: relative;
+    z-index: 1;
+    padding: 38px;
+}
+
+.garage-editorial .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+}
+
+.garage-editorial h3 {
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -1.2px;
+    margin: 27px 0;
+}
+
+.garage-editorial .text-link {
+    font-size: 10px;
+}
+
+.hero-visual img {
+    object-fit: contain;
+}
+
+@media(max-width:1050px) {
+    .garage-editorial {
+        grid-column: span 1;
+    }
+}
+
+@media(max-width:700px) {
+    .garage-editorial {
+        min-height: 250px;
+    }
+
+    .garage-editorial>div {
+        padding: 28px;
+    }
+
+    .garage-editorial h3 {
+        font-size: 30px;
+        margin: 22px 0;
+    }
+}
+
+.hero-visual {
+    background: var(--bg);
+}
+
+.hero-visual img {
+    mix-blend-mode: lighten;
+}
+
+.stat-label {
+    display: block;
+    min-height: 22px;
+}
+
+@media(max-width:700px) {
+    .stat-label {
+        min-height: 26px;
+        font-size: 7px;
+        line-height: 1.5;
+    }
+
+    .table-empty thead {
+        display: none;
+    }
+
+    .table-empty .journal-empty {
+        border-top: 0;
+    }
+}
+
+/* Keep the VIN easy to read below the motorcycle's mileage. */
+.bike .bike-vin {
+    margin-top: 16px;
+    font-family: monospace;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    overflow-wrap: anywhere;
+}
+
+.bike-vin span {
+    margin-right: 8px;
+    color: #71727c;
+    font-size: 10px;
+}
+
+/* Group the monthly spending chart and its filters in one panel. */
+.spending-section {
+    padding-top: 76px;
+    scroll-margin-top: 30px;
+}
+
+.spending-panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.spending-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 28px;
+    border-bottom: 1px solid var(--line);
+}
+
+.spending-toolbar h3 {
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+}
+
+.spending-toolbar p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.spending-filters {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.spending-filters label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 10px;
+    color: #a9a9b3;
+}
+
+.spending-filters select {
+    max-width: 190px;
+}
+
+.spending-filters .button {
+    min-height: 42px;
+    font-size: 11px;
+}
+
+.spending-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 30px 28px;
+    gap: 24px;
+}
+
+.spending-summary > div {
+    border-right: 1px solid var(--line);
+}
+
+.spending-summary > div:last-child {
+    border-right: 0;
+}
+
+.spending-summary span {
+    font-size: 9px;
+    letter-spacing: 1.2px;
+    color: #9999a4;
+}
+
+.spending-summary strong {
+    display: block;
+    margin: 13px 0 9px;
+    font-size: clamp(20px, 2.6vw, 33px);
+    font-weight: 500;
+    letter-spacing: -1px;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+.spending-summary small {
+    display: block;
+    font-size: 11px;
+    color: #93939f;
+    line-height: 1.5;
+}
+
+.chart-hint {
+    margin: 0 28px;
+    font-size: 11px;
+    color: #92929e;
+}
+
+.spending-chart-scroll {
+    padding: 38px 28px 26px;
+    overflow-x: auto;
+}
+
+.spending-chart {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    min-width: 590px;
+    gap: 16px;
+}
+
+.spending-axis {
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: right;
+    color: #92929e;
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+.spending-axis span:first-child {
+    transform: translateY(-50%);
+}
+
+.spending-axis span:last-child {
+    transform: translateY(50%);
+}
+
+/* Match the bars and grid lines to the same dollar scale. */
+.spending-plot {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 14px;
+}
+
+.chart-grid {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.chart-grid span {
+    border-top: 1px dashed #303138;
+}
+
+.chart-grid span:last-child {
+    border-top-style: solid;
+}
+
+.spending-month {
+    position: relative;
+    display: block;
+    border-radius: 3px;
+}
+
+.spending-track {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 190px;
+}
+
+.spending-bar {
+    display: block;
+    width: 100%;
+    max-width: 42px;
+    background: linear-gradient(180deg, #dbdce8, #777b91);
+    border-radius: 4px 4px 0 0;
+    transition: filter 0.2s;
+}
+
+.spending-month:hover .spending-bar,
+.spending-month:focus-visible .spending-bar {
+    filter: brightness(1.2);
+}
+
+.spending-month-label {
+    display: block;
+    padding-top: 14px;
+    text-align: center;
+    color: #a7a7b2;
+    font-size: 10px;
+}
+
+/* Reveal the exact cost when a month is hovered or focused with the keyboard. */
+.spending-tooltip {
+    display: none;
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    padding: 10px 13px;
+    border: 1px solid #555765;
+    border-radius: 6px;
+    background: #22242c;
+    color: #f4f4f7;
+    font-size: 11px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.spending-tooltip small {
+    display: block;
+    margin-top: 5px;
+    color: #b4b5c1;
+    font-size: 10px;
+}
+
+.spending-month:hover .spending-tooltip,
+.spending-month:focus-visible .spending-tooltip {
+    display: block;
+}
+
+.spending-month:nth-of-type(1) .spending-tooltip {
+    left: 0;
+    transform: none;
+}
+
+.spending-month:last-child .spending-tooltip {
+    left: auto;
+    right: 0;
+    transform: none;
+}
+
+.spending-empty {
+    padding: 25px 24px 40px;
+    text-align: center;
+}
+
+.empty-chart-icon {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 5px;
+    height: 35px;
+    margin-bottom: 20px;
+}
+
+.empty-chart-icon span {
+    width: 7px;
+    height: 14px;
+    background: #494b57;
+    border-radius: 2px;
+}
+
+.empty-chart-icon span:nth-child(2) {
+    height: 30px;
+}
+
+.empty-chart-icon span:nth-child(3) {
+    height: 22px;
+}
+
+.spending-empty h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.spending-empty p {
+    margin: 12px 0 22px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.spending-details {
+    border-top: 1px solid var(--line);
+}
+
+.spending-details summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    color: #b5b5c1;
+    font-size: 11px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.spending-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.spending-details[open] summary span {
+    transform: rotate(45deg);
+}
+
+.spending-details th[scope="row"] {
+    background: none;
+    text-transform: none;
+    font-size: 11px;
+    letter-spacing: 0;
+    border-top: 1px solid var(--line);
+}
+
+/* Keep the chart controls usable on tablets and phones. */
+@media (max-width: 1050px) {
+    .spending-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 700px) {
+    .spending-section {
+        padding-top: 48px;
+    }
+
+    .spending-toolbar {
+        padding: 22px;
+    }
+
+    .spending-filters {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 85px;
+    }
+
+    .spending-filters select {
+        max-width: none;
+    }
+
+    .spending-filters .button {
+        grid-column: 1 / -1;
+    }
+
+    .spending-summary {
+        padding: 24px 20px;
+        gap: 12px;
+    }
+
+    .spending-summary span {
+        display: block;
+        min-height: 24px;
+        font-size: 8px;
+        line-height: 1.5;
+        letter-spacing: 0.7px;
+    }
+
+    .spending-summary small {
+        font-size: 9px;
+    }
+
+    .spending-summary strong {
+        font-size: 20px;
+    }
+
+    .chart-hint {
+        margin: 0 22px;
+        line-height: 1.7;
+    }
+
+    .spending-chart-scroll {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .spending-chart {
+        min-width: 300px;
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .spending-plot {
+        column-gap: 4px;
+    }
+
+    .spending-axis,
+    .spending-month-label {
+        font-size: 8px;
+    }
+
+    .spending-details summary {
+        padding: 20px 22px;
+    }
+}
